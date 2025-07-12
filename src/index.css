@@ -1,0 +1,266 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Add the Brutal Type font family */
+@font-face {
+    font-family: 'Brutal Type';
+    src: url('/fonts/BrutalType-Thin.ttf') format('truetype');
+    font-weight: 100;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Brutal Type';
+    src: url('/fonts/BrutalType-ExtraLight.ttf') format('truetype');
+    font-weight: 200;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Brutal Type';
+    src: url('/fonts/BrutalType-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Brutal Type';
+    src: url('/fonts/BrutalType.ttf') format('truetype');
+    font-weight: 400;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Brutal Type';
+    src: url('/fonts/BrutalType-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Brutal Type';
+    src: url('/fonts/BrutalType-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Brutal Type';
+    src: url('/fonts/BrutalType-ExtraBold.ttf') format('truetype');
+    font-weight: 800;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Brutal Type';
+    src: url('/fonts/BrutalType-Black.ttf') format('truetype');
+    font-weight: 900;
+    font-display: swap;
+}
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        @apply text-white;
+        background-color: #1d1d22;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+}
+
+@layer utilities {
+    .brutal-font {
+        font-family: 'Brutal Type', 'Inter', sans-serif;
+        font-weight: 900;
+        letter-spacing: -0.02em;
+    }
+
+    .brutal-font-thin {
+        font-family: 'Brutal Type', 'Inter', sans-serif;
+        font-weight: 100;
+        letter-spacing: -0.01em;
+    }
+
+    .brutal-font-extralight {
+        font-family: 'Brutal Type', 'Inter', sans-serif;
+        font-weight: 200;
+        letter-spacing: -0.01em;
+    }
+
+    .brutal-font-light {
+        font-family: 'Brutal Type', 'Inter', sans-serif;
+        font-weight: 300;
+        letter-spacing: -0.01em;
+    }
+
+    .brutal-font-regular {
+        font-family: 'Brutal Type', 'Inter', sans-serif;
+        font-weight: 400;
+        letter-spacing: -0.01em;
+    }
+
+    .brutal-font-medium {
+        font-family: 'Brutal Type', 'Inter', sans-serif;
+        font-weight: 500;
+        letter-spacing: -0.015em;
+    }
+
+    .brutal-font-bold {
+        font-family: 'Brutal Type', 'Inter', sans-serif;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+    }
+
+    .brutal-font-extrabold {
+        font-family: 'Brutal Type', 'Inter', sans-serif;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+    }
+
+    .brutal-font-black {
+        font-family: 'Brutal Type', 'Inter', sans-serif;
+        font-weight: 900;
+        letter-spacing: -0.02em;
+    }
+
+    .animate-fade-in {
+        animation: fadeIn 1s ease-out;
+    }
+
+    .animate-fade-in-delay-1 {
+        animation: fadeIn 1s ease-out 0.2s both;
+    }
+
+    .animate-fade-in-delay-2 {
+        animation: fadeIn 1s ease-out 0.4s both;
+    }
+
+    .animate-fade-in-delay-3 {
+        animation: fadeIn 1s ease-out 0.6s both;
+    }
+
+    .animate-fade-in-delay-4 {
+        animation: fadeIn 1s ease-out 0.8s both;
+    }
+
+    .animate-spin-slow {
+        animation: spin 20s linear infinite;
+    }
+
+    .line-clamp-3 {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    /* Enhanced grid pattern */
+    .bg-grid-large {
+        background-image:
+            linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        background-size: 80px 80px;
+    }
+
+    .bg-grid-fade {
+        mask-image: radial-gradient(ellipse at center, black 40%, transparent 70%);
+        -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 70%);
+    }
+
+    .bg-custom-dark {
+        background-color: #1d1d22;
+    }
+}
+
+@keyframes shine {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    50% {
+        transform: translateX(100%);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1d1d22;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #4b5563;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #6b7280;
+}
+
+/* Add this to your global CSS file */
+
+@keyframes slide-in {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fade-out {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}
+
+.animate-slide-in {
+    animation: slide-in 0.3s ease-out forwards;
+}
+
+.animate-fade-out {
+    animation: fade-out 0.3s ease-in forwards;
+}
