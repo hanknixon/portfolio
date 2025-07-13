@@ -53,6 +53,17 @@ function App() {
     return () => window.removeEventListener("popstate", handlePopState);
   }, []);
 
+  useEffect(() => {
+    const path = window.location.pathname;
+    if (path === "/personal") {
+      setCurrentPage("personal");
+    } else if (path === "/contact") {
+      setCurrentPage("contact");
+    } else {
+      setCurrentPage("professional");
+    }
+  }, []);
+
   const handleLoadingComplete = () => {
     setIsLoading(false);
   };
