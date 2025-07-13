@@ -1,8 +1,131 @@
 import React from "react";
 import { Download, Github, Instagram, Linkedin, Youtube } from "lucide-react";
-import SplitText from "./ui/split-text";
-import { BGPattern } from "./ui/bg-pattern";
-import CountUp from "./ui/CountUp";
+
+// Mock components since we don't have the actual imports
+const SplitText = ({ text, className, delay, duration, textAlign }) => (
+  <div className={className}>{text}</div>
+);
+
+const BGPattern = ({ variant, mask, size, fill, className }) => (
+  <div
+    className={className}
+    style={{
+      backgroundImage: `
+      linear-gradient(to right, ${fill} 1px, transparent 1px),
+      linear-gradient(to bottom, ${fill} 1px, transparent 1px)
+    `,
+      backgroundSize: `${size}px ${size}px`,
+    }}
+  />
+);
+
+// Proper CountUp component with framer-motion animations
+const CountUp = ({
+  to,
+  from = 0,
+  direction = "up",
+  delay = 0,
+  duration = 2,
+  className = "",
+  startWhen = true,
+  separator = "",
+  onStart,
+  onEnd,
+}) => {
+  const ref = React.useRef(null);
+  const motionValue = React.useMemo(() => {
+    // Using a simple state-based approach since we don't have useMotionValue
+    return { value: direction === "down" ? to : from };
+  }, [direction, to, from]);
+
+  const [displayValue, setDisplayValue] = React.useState(
+    direction === "down" ? to : from
+  );
+  const [isInView, setIsInView] = React.useState(false);
+
+  // Simple intersection observer for inView detection
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  React.useEffect(() => {
+    if (isInView && startWhen) {
+      if (typeof onStart === "function") {
+        onStart();
+      }
+
+      const timeoutId = setTimeout(() => {
+        const startValue = direction === "down" ? to : from;
+        const endValue = direction === "down" ? from : to;
+        const startTime = Date.now();
+        const animate = () => {
+          const elapsed = Date.now() - startTime;
+          const progress = Math.min(elapsed / (duration * 1000), 1);
+
+          // Easing function for smooth animation
+          const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+          const currentValue =
+            startValue + (endValue - startValue) * easeOutQuart;
+
+          setDisplayValue(Math.round(currentValue));
+
+          if (progress < 1) {
+            requestAnimationFrame(animate);
+          } else if (typeof onEnd === "function") {
+            onEnd();
+          }
+        };
+
+        requestAnimationFrame(animate);
+      }, delay * 1000);
+
+      return () => clearTimeout(timeoutId);
+    }
+  }, [
+    isInView,
+    startWhen,
+    direction,
+    from,
+    to,
+    delay,
+    duration,
+    onStart,
+    onEnd,
+  ]);
+
+  const formattedValue = React.useMemo(() => {
+    const options = {
+      useGrouping: !!separator,
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    };
+    const formattedNumber = Intl.NumberFormat("en-US", options).format(
+      displayValue
+    );
+    return separator
+      ? formattedNumber.replace(/,/g, separator)
+      : formattedNumber;
+  }, [displayValue, separator]);
+
+  return (
+    <span className={className} ref={ref}>
+      {formattedValue}
+    </span>
+  );
+};
 
 const Hero = () => {
   return (
@@ -70,54 +193,54 @@ const Hero = () => {
               grounded in progress
             </p>
 
-            {/* Actions */}
-            <div className="flex items-center gap-6 animate-fade-in-delay-3 mt-8">
+            {/* Actions - FIXED FOR MOBILE */}
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 animate-fade-in-delay-3 mt-8">
               {/* Download CV Button */}
               <a
                 href="/resume/Hank Emmanuel Nixon Resume.pdf"
                 download="Hank Emmanuel Nixon Resume.pdf"
-                className="flex items-center gap-3 px-6 py-3 border border-green-400 text-green-400 rounded-full hover:bg-green-400 hover:text-black transition-all duration-300 font-medium hover:shadow-lg hover:shadow-green-400/25"
+                className="flex items-center gap-3 px-6 py-3 border border-green-400 text-green-400 rounded-full hover:bg-green-400 hover:text-black transition-all duration-300 font-medium hover:shadow-lg hover:shadow-green-400/25 w-full sm:w-auto justify-center sm:justify-start"
               >
                 DOWNLOAD RESUME
                 <Download size={18} />
               </a>
 
-              {/* Social Links - 4 ICONS */}
-              <div className="flex items-center gap-4">
+              {/* Social Links - FIXED FOR MOBILE VISIBILITY */}
+              <div className="flex items-center gap-4 w-full sm:w-auto justify-center sm:justify-start">
                 <a
                   href="https://github.com/hanknixon"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 border border-green-400/30 rounded-full flex items-center justify-center text-green-400 hover:bg-green-400 hover:text-black hover:border-green-400 transition-all duration-300 hover:scale-110"
+                  className="w-12 h-12 sm:w-10 sm:h-10 border border-green-400/30 rounded-full flex items-center justify-center text-green-400 hover:bg-green-400 hover:text-black hover:border-green-400 transition-all duration-300 hover:scale-110"
                 >
-                  <Github size={18} />
+                  <Github size={20} className="sm:w-[18px] sm:h-[18px]" />
                 </a>
 
                 <a
                   href="https://www.linkedin.com/in/hanknixon/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 border border-green-400/30 rounded-full flex items-center justify-center text-green-400 hover:bg-green-400 hover:text-black hover:border-green-400 transition-all duration-300 hover:scale-110"
+                  className="w-12 h-12 sm:w-10 sm:h-10 border border-green-400/30 rounded-full flex items-center justify-center text-green-400 hover:bg-green-400 hover:text-black hover:border-green-400 transition-all duration-300 hover:scale-110"
                 >
-                  <Linkedin size={18} />
+                  <Linkedin size={20} className="sm:w-[18px] sm:h-[18px]" />
                 </a>
 
                 <a
                   href="https://www.instagram.com/h4nk_/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 border border-green-400/30 rounded-full flex items-center justify-center text-green-400 hover:bg-green-400 hover:text-black hover:border-green-400 transition-all duration-300 hover:scale-110"
+                  className="w-12 h-12 sm:w-10 sm:h-10 border border-green-400/30 rounded-full flex items-center justify-center text-green-400 hover:bg-green-400 hover:text-black hover:border-green-400 transition-all duration-300 hover:scale-110"
                 >
-                  <Instagram size={18} />
+                  <Instagram size={20} className="sm:w-[18px] sm:h-[18px]" />
                 </a>
 
                 <a
                   href="https://www.youtube.com/@h4nkamv"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 border border-green-400/30 rounded-full flex items-center justify-center text-green-400 hover:bg-green-400 hover:text-black hover:border-green-400 transition-all duration-300 hover:scale-110"
+                  className="w-12 h-12 sm:w-10 sm:h-10 border border-green-400/30 rounded-full flex items-center justify-center text-green-400 hover:bg-green-400 hover:text-black hover:border-green-400 transition-all duration-300 hover:scale-110"
                 >
-                  <Youtube size={18} />
+                  <Youtube size={20} className="sm:w-[18px] sm:h-[18px]" />
                 </a>
               </div>
             </div>

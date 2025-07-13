@@ -82,8 +82,8 @@ const Footer = ({ onPageChange }) => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12"
           >
-            <a
-              href="mailto:hankenixon456@gmail.com"
+            <button
+              onClick={() => onPageChange("contact")}
               className="group flex items-center gap-3 px-8 py-4 bg-green-400 text-black rounded-full font-semibold hover:bg-green-300 transition-all duration-300 hover:shadow-lg hover:shadow-green-400/25 hover:scale-105"
             >
               <Send
@@ -91,7 +91,7 @@ const Footer = ({ onPageChange }) => {
                 className="group-hover:translate-x-1 transition-transform duration-300"
               />
               Let's get in touch
-            </a>
+            </button>
 
             <button
               onClick={() => onPageChange("personal")}

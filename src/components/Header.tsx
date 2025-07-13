@@ -2,7 +2,16 @@
 
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { User, Heart, Mail, Globe, Menu, X, ChevronUp } from "lucide-react";
+import {
+  User,
+  Heart,
+  Mail,
+  Globe,
+  Menu,
+  X,
+  ChevronUp,
+  ArrowLeft,
+} from "lucide-react";
 
 const Header = ({
   onPageChange,
@@ -105,6 +114,7 @@ const Header = ({
       onClick: () => {
         setActiveTab("Professional");
         onPageChange?.("professional");
+        setIsMenuOpen(false); // Close mobile menu after selection
       },
     },
     {
@@ -115,6 +125,7 @@ const Header = ({
       onClick: () => {
         setActiveTab("Personal");
         onPageChange?.("personal");
+        setIsMenuOpen(false); // Close mobile menu after selection
       },
     },
     {
@@ -125,6 +136,7 @@ const Header = ({
       onClick: () => {
         setActiveTab("Contact");
         onPageChange?.("contact");
+        setIsMenuOpen(false); // Close mobile menu after selection
       },
     },
   ];
@@ -207,9 +219,9 @@ const Header = ({
         </header>
       )}
 
-      {/* Anime Navigation Bar */}
+      {/* Anime Navigation Bar - HIDDEN WHEN MOBILE MENU IS OPEN */}
       <AnimatePresence>
-        {showNavbar && (
+        {showNavbar && !isMenuOpen && (
           <motion.div
             className={`fixed ${
               currentPage === "professional" ? "top-16" : "top-4"
@@ -463,7 +475,7 @@ const Header = ({
 
       {/* Scroll to Top Button - Shows when navbar is hidden and not in hero */}
       <AnimatePresence>
-        {!showNavbar && !isInHeroSection && (
+        {!showNavbar && !isInHeroSection && !isMenuOpen && (
           <motion.button
             onClick={scrollToTop}
             className="fixed top-4 right-4 z-[9999] bg-green-400 text-black p-3 rounded-full shadow-lg hover:bg-green-300 transition-colors"
@@ -478,66 +490,112 @@ const Header = ({
         )}
       </AnimatePresence>
 
-      {/* Mobile Navigation */}
-      {isMenuOpen && (
-        <div className="md:hidden fixed top-0 left-0 w-full h-full bg-black/95 backdrop-blur-md z-[9998] pt-20">
-          <div className="flex flex-col items-center space-y-8 px-6 py-12">
-            {navItems.map((item) => (
-              <button
-                key={item.label}
-                className={`text-2xl font-medium transition-colors duration-200 ${
-                  item.active
-                    ? "text-green-400"
-                    : "text-white/70 hover:text-white"
-                }`}
-                onClick={(e) => {
-                  e.preventDefault();
-                  setIsMenuOpen(false);
-                  item.onClick();
-                }}
-              >
-                {item.label}
-              </button>
-            ))}
-            <a
-              href="/resume/Hank Emmanuel Nixon Resume.pdf"
-              download="Hank Emmanuel Nixon Resume.pdf"
-              className="flex items-center gap-2 px-6 py-3 bg-green-400 text-black rounded-full text-lg font-medium hover:bg-green-300 transition-all duration-300"
+      {/* IMPROVED Mobile Navigation with Back Button */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            className="md:hidden fixed inset-0 bg-black/95 backdrop-blur-md z-[9998]"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            {/* Back Button */}
+            <motion.button
+              onClick={() => setIsMenuOpen(false)}
+              className="absolute top-6 left-6 text-white z-50 flex items-center gap-2 hover:text-green-400 transition-colors"
+              initial={{ x: -50, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ delay: 0.1 }}
             >
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
+              <ArrowLeft size={24} />
+              <span className="text-lg font-medium">Back</span>
+            </motion.button>
+
+            {/* Close Button */}
+            <motion.button
+              onClick={() => setIsMenuOpen(false)}
+              className="absolute top-6 right-6 text-white z-50 hover:text-green-400 transition-colors"
+              initial={{ x: 50, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ delay: 0.1 }}
+            >
+              <X size={24} />
+            </motion.button>
+
+            {/* Menu Content */}
+            <div className="flex flex-col items-center justify-center h-full space-y-8 px-6">
+              {/* Navigation Items */}
+              <div className="flex flex-col items-center space-y-6">
+                {navItems.map((item, index) => (
+                  <motion.button
+                    key={item.label}
+                    className={`text-3xl font-medium transition-colors duration-200 ${
+                      item.active
+                        ? "text-green-400"
+                        : "text-white/70 hover:text-white"
+                    }`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      item.onClick();
+                    }}
+                    initial={{ y: 50, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.2 + index * 0.1 }}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    {item.label}
+                  </motion.button>
+                ))}
+              </div>
+
+              {/* Download Resume Button */}
+              <motion.a
+                href="/resume/Hank Emmanuel Nixon Resume.pdf"
+                download="Hank Emmanuel Nixon Resume.pdf"
+                className="flex items-center gap-3 px-8 py-4 bg-green-400 text-black rounded-full text-lg font-medium hover:bg-green-300 transition-all duration-300 hover:shadow-lg hover:shadow-green-400/25"
+                initial={{ y: 50, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.5 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                <path
-                  d="M21 15V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V15"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M7 10L12 15L17 10"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M12 15V3"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-              Download Resume
-            </a>
-          </div>
-        </div>
-      )}
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M21 15V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V15"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M7 10L12 15L17 10"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M12 15V3"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                Download Resume
+              </motion.a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 };

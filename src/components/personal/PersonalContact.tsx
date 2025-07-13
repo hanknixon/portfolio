@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 
-const PersonalContact = () => {
+const PersonalContact = ({ onPageChange }) => {
   const socialLinks = [
     {
       icon: Github,
@@ -81,8 +81,8 @@ const PersonalContact = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12"
           >
-            <a
-              href="mailto:hankenixon456@gmail.com?subject=Hey! Let's Connect 👋"
+            <button
+              onClick={() => onPageChange("contact")}
               className="group flex items-center gap-3 px-8 py-4 bg-green-400 text-black rounded-full font-semibold hover:bg-green-300 transition-all duration-300 hover:shadow-lg hover:shadow-green-400/25 hover:scale-105"
             >
               <Send
@@ -90,15 +90,15 @@ const PersonalContact = () => {
                 className="group-hover:translate-x-1 transition-transform duration-300"
               />
               Drop me a message
-            </a>
+            </button>
 
-            <a
-              href="/"
+            <button
+              onClick={() => onPageChange("professional")}
               className="group flex items-center gap-3 px-8 py-4 border-2 border-green-400/30 text-green-400 rounded-full font-semibold hover:bg-green-400/10 hover:border-green-400 transition-all duration-300"
             >
               <Briefcase size={20} />
               View my Professional Work
-            </a>
+            </button>
           </motion.div>
 
           {/* Social Links */}

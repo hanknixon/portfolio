@@ -9,6 +9,7 @@ import Hero from "./components/Hero";
 import About from "./components/About";
 import Experience from "./components/Experience";
 import Projects from "./components/Projects";
+import DesignEdits from "./components/DesignEdits";
 import Footer from "./components/Footer";
 
 // Personal Page Components
@@ -105,6 +106,7 @@ function App() {
             <About />
             <Experience />
             <Projects />
+            <DesignEdits />
             <Footer onPageChange={handlePageChange} />
           </>
         ) : currentPage === "personal" ? (
@@ -113,7 +115,7 @@ function App() {
             <PersonalHero />
             <PersonalAbout />
             <Hobbies />
-            <PersonalContact />
+            <PersonalContact onPageChange={handlePageChange} />
           </>
         ) : (
           // Contact Page
