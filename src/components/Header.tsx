@@ -36,6 +36,7 @@ const Header = ({
   const [isMobile, setIsMobile] = useState(false);
   const [showNavbar, setShowNavbar] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Update activeTab when currentPage changes
   useEffect(() => {
@@ -50,6 +51,36 @@ const Header = ({
     );
   }, [currentPage]);
 
+  // Listen for modal open/close events
+  useEffect(() => {
+    const handleModalOpen = () => setIsModalOpen(true);
+    const handleModalClose = () => setIsModalOpen(false);
+
+    // Listen for modal state changes by checking for modal elements
+    const checkForModal = () => {
+      const modalElements = document.querySelectorAll(
+        '[data-modal="true"], .fixed.inset-0.z-50, .fixed.inset-0.z-\\[60\\]'
+      );
+      setIsModalOpen(modalElements.length > 0);
+    };
+
+    // Use MutationObserver to detect modal creation/removal
+    const observer = new MutationObserver(checkForModal);
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+
+    // Initial check
+    checkForModal();
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   useEffect(() => {
     setMounted(true);
 
@@ -58,6 +89,12 @@ const Header = ({
       const heroHeight = window.innerHeight;
 
       setScrolled(currentScrollY > 50);
+
+      // Don't show navbar if modal is open
+      if (isModalOpen) {
+        setShowNavbar(false);
+        return;
+      }
 
       // Navbar visibility logic
       if (currentScrollY < heroHeight * 0.8) {
@@ -93,7 +130,7 @@ const Header = ({
         clearTimeout(timeoutId);
       }
     };
-  }, [lastScrollY]);
+  }, [lastScrollY, isModalOpen]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -114,7 +151,7 @@ const Header = ({
       onClick: () => {
         setActiveTab("Professional");
         onPageChange?.("professional");
-        setIsMenuOpen(false); // Close mobile menu after selection
+        setIsMenuOpen(false);
       },
     },
     {
@@ -125,7 +162,7 @@ const Header = ({
       onClick: () => {
         setActiveTab("Personal");
         onPageChange?.("personal");
-        setIsMenuOpen(false); // Close mobile menu after selection
+        setIsMenuOpen(false);
       },
     },
     {
@@ -136,7 +173,7 @@ const Header = ({
       onClick: () => {
         setActiveTab("Contact");
         onPageChange?.("contact");
-        setIsMenuOpen(false); // Close mobile menu after selection
+        setIsMenuOpen(false);
       },
     },
   ];
@@ -219,9 +256,9 @@ const Header = ({
         </header>
       )}
 
-      {/* Anime Navigation Bar - HIDDEN WHEN MOBILE MENU IS OPEN */}
+      {/* Anime Navigation Bar - HIDDEN WHEN MOBILE MENU IS OPEN OR MODAL IS OPEN */}
       <AnimatePresence>
-        {showNavbar && !isMenuOpen && (
+        {showNavbar && !isMenuOpen && !isModalOpen && (
           <motion.div
             className={`fixed ${
               currentPage === "professional" ? "top-16" : "top-4"
@@ -475,7 +512,7 @@ const Header = ({
 
       {/* Scroll to Top Button - Shows when navbar is hidden and not in hero */}
       <AnimatePresence>
-        {!showNavbar && !isInHeroSection && !isMenuOpen && (
+        {!showNavbar && !isInHeroSection && !isMenuOpen && !isModalOpen && (
           <motion.button
             onClick={scrollToTop}
             className="fixed top-4 right-4 z-[9999] bg-green-400 text-black p-3 rounded-full shadow-lg hover:bg-green-300 transition-colors"

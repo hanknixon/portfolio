@@ -564,8 +564,9 @@ const Hobbies = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm"
+            className="fixed inset-0 z-[60] flex items-center justify-center bg-black/80 backdrop-blur-sm"
             onClick={onClose}
+            data-modal="true"
           >
             <motion.div
               initial={{ opacity: 0, scale: 0.8, y: 50 }}
@@ -578,7 +579,7 @@ const Hobbies = () => {
                 duration: 0.4,
               }}
               onClick={(e) => e.stopPropagation()}
-              className="relative w-full max-w-6xl mx-4 rounded-3xl shadow-2xl overflow-hidden max-h-[90vh] flex flex-col"
+              className="relative w-full max-w-6xl mx-4 rounded-3xl shadow-2xl overflow-hidden max-h-[90vh] flex flex-col z-[70]"
               style={{ backgroundColor: "#1d1d22" }}
             >
               {/* Header */}
