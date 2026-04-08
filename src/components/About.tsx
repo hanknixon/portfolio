@@ -203,7 +203,7 @@ const About = () => {
   const ReachOut = () => {
     const copyEmailToClipboard = (e) => {
       e.stopPropagation();
-      const email = "hankenixon456@gmail.com";
+      const email = "hank.enixon@gmail.com";
 
       navigator.clipboard
         .writeText(email)

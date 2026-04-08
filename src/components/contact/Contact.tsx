@@ -33,8 +33,8 @@ const Contact = () => {
     {
       iconSrc: "/icons/gmail.webp",
       label: "Email",
-      value: "hankenixon456@gmail.com",
-      href: "mailto:hankenixon456@gmail.com",
+      value: "hank.enixon@gmail.com",
+      href: "mailto:hank.enixon@gmail.com",
       color: "text-green-400",
     },
     {
@@ -441,10 +441,10 @@ const Contact = () => {
                 <p className="text-gray-400 text-sm text-center">
                   Or email me directly at{" "}
                   <a
-                    href="mailto:hankenixon456@gmail.com"
+                    href="mailto:hank.enixon@gmail.com"
                     className="text-green-400 hover:text-green-300 transition-colors"
                   >
-                    hankenixon456@gmail.com
+                    hank.enixon@gmail.com
                   </a>
                 </p>
               </div>

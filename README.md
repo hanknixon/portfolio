@@ -241,7 +241,7 @@ While this is a personal portfolio, suggestions and feedback are welcome!
 
 ## 📞 Contact
 
-- **Email**: hankenixon456@gmail.com
+- **Email**: hank.enixon@gmail.com
 - **LinkedIn**: [linkedin.com/in/hanknixon](https://www.linkedin.com/in/hanknixon/)
 - **GitHub**: [github.com/hanknixon](https://github.com/hanknixon)
 - **Portfolio**: [Live Demo](https://your-portfolio-url.com)

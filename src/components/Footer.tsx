@@ -39,7 +39,7 @@ const Footer = ({ onPageChange }) => {
     },
     {
       icon: Mail,
-      href: "mailto:hankenixon456@gmail.com",
+      href: "mailto:hank.enixon@gmail.com",
       label: "Email",
       color: "hover:bg-green-600",
     },
