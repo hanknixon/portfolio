@@ -1,237 +1,142 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { AnimatedTabs } from "@/components/ui/animated-tabs";
-import { AnimatedText } from "@/components/ui/animated-underline-text-one";
+import { ArrowUpRight, ArrowRight } from "lucide-react";
 import { useScrollAnimation } from "./hooks/useScrollAnimation";
-import {
-  Brain,
-  Users,
-  Coffee,
-  Cloud,
-  ExternalLink,
-  Github,
-  Palette,
-} from "lucide-react";
+
+const projectsList = [
+  {
+    id: "careerwise",
+    title: "CareerWise Platform",
+    description: "AI-powered career recommendation tool using K‑Means clustering and KNN, with an interactive UI and backend dashboard.",
+    image: "/images/careerwise.png",
+    link: "https://github.com/Hasheeeem/CareerWise",
+  },
+  {
+    id: "hash-learning",
+    title: "HASH Learning Platform",
+    description: "AI‑powered interactive learning web application with intelligent content generation and real-time feedback systems.",
+    image: "/images/hash.png",
+    link: "https://github.com/hanknixon/Hash",
+  },
+  {
+    id: "esdecorations",
+    title: "E and S Decorations",
+    description: "A fully responsive e‑commerce site showcasing event and home décor services and products.",
+    image: "/images/esdecorations.png",
+    link: "https://www.esdecorations.in/",
+  },
+  {
+    id: "securethread",
+    title: "SecureThread",
+    description: "Cybersecurity platform leveraging a SAST framework with SonarQube and Semgrep, scalable backend architecture, and real-time reporting.",
+    image: "/images/securethread.png",
+    link: "#",
+  }
+];
 
 const Projects = () => {
-  const { ref: titleRef, isVisible: titleVisible } = useScrollAnimation();
-  const { ref: tabsRef, isVisible: tabsVisible } = useScrollAnimation();
-  const { ref: githubRef, isVisible: githubVisible } = useScrollAnimation();
-
-  const projects = [
-    {
-      id: "careerwise",
-      title: "CareerWise Platform",
-      description:
-        "AI-powered career recommendation tool using K‑Means clustering and KNN, with an interactive UI and backend dashboard.",
-      stack: [
-        "FastAPI",
-        "Python",
-        "React",
-        "PostgreSQL",
-        "MongoDB",
-        "scikit-learn",
-        "OpenAI",
-      ],
-      image: "/images/careerwise.jpg",
-      icon: Brain,
-      hasLiveDemo: false,
-      githubUrl: "https://github.com/Hasheeeem/CareerWise",
-    },
-    {
-      id: "hash-learning",
-      title: "HASH Learning Platform",
-      description:
-        "AI‑powered interactive learning web application with intelligent content generation and real-time feedback systems.",
-      stack: ["FastAPI", "React", "PostgreSQL", "Redis", "OpenAI API"],
-      image: "/images/hash.png",
-      icon: Brain,
-      hasLiveDemo: false,
-      githubUrl: "https://github.com/hanknixon/Hash",
-    },
-    {
-      id: "client-project",
-      title: "E and S Decorations",
-      description:
-        "A fully responsive e‑commerce site showcasing event and home décor services and products. **Tech Stack:** React (frontend), FastAPI or Express (backend), TypeScript, PostgreSQL or MongoDB, Tailwind CSS, hosted on Vercel or equivalent with CI/CD.",
-      stack: [
-        "React",
-        "TypeScript",
-        "FastAPI",
-        "PostgreSQL",
-        "Tailwind CSS",
-        "Vercel",
-      ],
-      image: "/images/esdecorations.png",
-      icon: Palette,
-      hasLiveDemo: true,
-      liveUrl: "https://www.esdecorations.in/",
-      githubUrl: "https://github.com/esdecorations/esdecorations",
-    },
-    {
-      id: "recipe4us",
-      title: "Recipe4Us",
-      description:
-        "Community recipe portal with uploads, search, and filtering. A platform for food enthusiasts to share and discover recipes.",
-      stack: ["Node.js", "Express", "MongoDB", "JavaScript", "CSS", "HTML"],
-      image: "/images/recipe4us.png",
-      icon: Users,
-      hasLiveDemo: false,
-      githubUrl: "https://github.com/hanknixon/Recipe-Sharing-Platform",
-    },
-    {
-      id: "cafe-management",
-      title: "Cafe Management System",
-      description:
-        "Java-based CLI tool for managing cafe orders and inventory with efficient database operations and user-friendly interface.",
-      stack: ["Java", "MySQL"],
-      image:
-        "https://images.unsplash.com/photo-1559496417-e7f25cb247f3?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3",
-      icon: Coffee,
-      hasLiveDemo: false,
-      githubUrl: "https://github.com/hanknixon/Cafe-Management-System",
-    },
-    {
-      id: "weather-app",
-      title: "Live Weather App",
-      description:
-        "Cross-platform (mobile & web) weather dashboard in Flutter using live API data with beautiful UI and real-time updates.",
-      stack: ["Flutter", "Dart", "Weather API", "Cross-platform"],
-      image:
-        "https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3",
-      icon: Cloud,
-      hasLiveDemo: false,
-      githubUrl: "https://github.com/hanknixon/weather-app",
-    },
-  ];
-
-  // Create tabs data from projects
-  const projectTabs = projects.map((project) => {
-    const IconComponent = project.icon;
-
-    return {
-      id: project.id,
-      label: project.title,
-      content: (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full h-full">
-          <div className="relative rounded-lg overflow-hidden">
-            <img
-              src={project.image}
-              alt={project.title}
-              className="rounded-lg w-full h-60 object-cover mt-0 !m-0 shadow-[0_0_20px_rgba(0,0,0,0.2)] border-none"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-            <div className="absolute top-4 left-4 w-12 h-12 bg-green-400 rounded-lg flex items-center justify-center">
-              <IconComponent className="text-black" size={24} />
-            </div>
-          </div>
-
-          <div className="flex flex-col gap-y-4">
-            <h2 className="text-2xl font-bold mb-0 text-white mt-0 !m-0">
-              {project.title}
-            </h2>
-            <p className="text-sm text-gray-200 mt-0 leading-relaxed">
-              {project.description}
-            </p>
-
-            <div className="flex flex-wrap gap-2">
-              {project.stack.map((tech, techIndex) => (
-                <span
-                  key={techIndex}
-                  className="px-3 py-1 bg-green-400/10 text-green-400 border border-green-400/30 rounded-full text-xs font-medium"
-                >
-                  {tech}
-                </span>
-              ))}
-            </div>
-
-            <div className="flex gap-3 pt-2">
-              {project.hasLiveDemo && (
-                <a
-                  href={project.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-4 py-2 bg-green-400 hover:bg-green-300 text-black rounded-lg font-medium transition-colors"
-                >
-                  <ExternalLink size={16} />
-                  Live Demo
-                </a>
-              )}
-              <a
-                href={project.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 px-4 py-2 border border-green-400/30 text-green-400 rounded-lg font-medium hover:bg-green-400/10 transition-colors"
-              >
-                <Github size={16} />
-                GitHub
-              </a>
-            </div>
-          </div>
-        </div>
-      ),
-    };
-  });
+  const { ref, isVisible } = useScrollAnimation();
 
   return (
-    <section
-      id="projects"
-      className="py-20 relative"
+    <motion.section
+      id="professional"
+      ref={ref}
+      initial={{ opacity: 0, y: 30 }}
+      animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+      transition={{ duration: 0.7, ease: "easeOut" }}
+      className="relative z-10 pt-10 pb-20 md:pt-16 md:pb-28 overflow-hidden"
       style={{ backgroundColor: "#1d1d22" }}
     >
-      <div className="container mx-auto px-6">
-        <div className="max-w-6xl mx-auto">
-          {/* Animated Title */}
-          <motion.h2
-            ref={titleRef}
-            initial={{ opacity: 0, y: 50 }}
-            animate={
-              titleVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }
-            }
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="text-4xl font-bold text-center mb-16 bg-gradient-to-r from-green-400 to-emerald-300 bg-clip-text text-transparent brutal-font"
-          >
-            My Projects
-          </motion.h2>
+      {/* Background Image */}
+      <div 
+        className="absolute inset-0 opacity-[0.08] pointer-events-none mix-blend-luminosity z-0"
+        style={{
+          backgroundImage: "url('/images/bgprojects.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat"
+        }}
+      />
+      
+      {/* Background Gradient Fades */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#1d1d22] via-transparent to-[#1d1d22] pointer-events-none z-0" />
 
-          {/* Animated Tabs */}
-          <motion.div
-            ref={tabsRef}
-            initial={{ opacity: 0, y: 50 }}
-            animate={tabsVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="flex justify-center mb-12"
-          >
-            <AnimatedTabs
-              tabs={projectTabs}
-              className="w-full max-w-none"
-              defaultTab={projectTabs[0]?.id}
-            />
-          </motion.div>
+      <div className="relative z-10 w-full max-w-[1800px] mx-auto px-4 md:px-8 flex flex-col gap-10 md:gap-12">
 
-          {/* GitHub Link Section - Keep Original Animation */}
-          <div ref={githubRef} className="flex justify-center mt-12">
-            {githubVisible && (
-              <a
-                href="https://github.com/hanknixon?tab=repositories"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group"
-              >
-                <AnimatedText
-                  text="Visit my GitHub to view more"
-                  textClassName="text-2xl font-semibold text-green-400 group-hover:text-green-300 transition-colors cursor-pointer"
-                  underlineClassName="text-green-400 group-hover:text-green-300"
-                  underlinePath="M 0,10 Q 150,0 300,10"
-                  underlineHoverPath="M 0,10 Q 150,20 300,10"
-                  underlineDuration={1.2}
-                />
-              </a>
-            )}
-          </div>
+        {/* Section Heading */}
+        <div className="flex justify-start">
+          <h2 className="text-white text-3xl md:text-5xl font-bold brutal-font tracking-tight">
+            Featured <span className="text-green-400">Projects</span>
+          </h2>
         </div>
+
+        {/* Project Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-10">
+          {projectsList.map((project, index) => (
+            <motion.div
+              key={project.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="flex flex-col group cursor-pointer relative isolate w-full aspect-square md:aspect-[4/3] rounded-2xl overflow-hidden shadow-lg"
+              onClick={() => {
+                if (project.link && project.link !== "#") {
+                  window.open(project.link, "_blank", "noopener,noreferrer");
+                }
+              }}
+            >
+              {/* Background Image */}
+              <img
+                src={project.image}
+                alt={project.title}
+                className="absolute inset-0 w-full h-full object-cover transition-all duration-700 group-hover:scale-105 group-hover:blur-[6px]"
+              />
+
+              {/* Hover Dark Overlay */}
+              <div className={`absolute inset-0 bg-black/0 transition-colors duration-500 z-10 ${project.link ? 'group-hover:bg-black/40' : ''}`} />
+
+              {/* Bottom Gradient for Text */}
+              <div className="absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10 pointer-events-none" />
+
+              {/* Circular Hover Button */}
+              {project.link && (
+                <div className="absolute inset-0 flex items-center justify-center z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  <div className="bg-white text-black w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center shadow-2xl transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
+                    <ArrowRight size={28} strokeWidth={1.5} />
+                  </div>
+                </div>
+              )}
+
+              {/* Text Content inside Card */}
+              <div className="absolute inset-x-0 bottom-0 p-6 md:p-8 z-20 flex flex-col md:flex-row items-start md:items-end justify-between gap-4 pointer-events-none">
+                <h3 className="text-white group-hover:text-green-400 transition-colors duration-500 text-2xl md:text-3xl font-black brutal-font tracking-tight uppercase leading-none md:w-[45%]">
+                  {project.title}
+                </h3>
+                <p className="text-gray-200 text-sm md:text-[14px] font-medium leading-snug md:w-[50%] md:text-left">
+                  {project.description}
+                </p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* View all my projects */}
+        <div className="flex justify-center mt-4 md:mt-8 relative z-50">
+          <a
+            href="https://github.com/hanknixon"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1 group cursor-pointer p-2"
+          >
+            <span className="relative text-white text-[1.1rem] font-bold brutal-font tracking-wide flex items-center gap-1 pb-1">
+              View all my projects <ArrowUpRight size={20} strokeWidth={2.5} />
+              <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-white transition-all duration-300 ease-in-out group-hover:w-full"></span>
+            </span>
+          </a>
+        </div>
+
       </div>
-    </section>
+    </motion.section>
   );
 };
 

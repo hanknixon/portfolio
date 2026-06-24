@@ -188,8 +188,8 @@ const Hero = () => {
 
             {/* Description */}
             <p className="text-gray-400 text-lg leading-relaxed max-w-lg animate-fade-in-delay-2 mt-6">
-              Final Year Under Grad Student | Software Engineer & Full-Stack
-              Developer | Learning, Building, Evolving | Driven by purpose,
+              Computer Science Graduate | Software Engineer & Graphic
+              Designer | Learning, Building, Evolving | Driven by purpose,
               grounded in progress
             </p>
 
@@ -294,10 +294,10 @@ const Hero = () => {
         {/* Stats Section with CountUp Animation */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-24 max-w-4xl mx-auto animate-fade-in-delay-4">
           {[
-            { number: 21, label: "Age" },
-            { number: 1, label: "Years of experience" },
-            { number: 12, label: "Projects worked on" },
-            { number: 2, label: "Projects Deployed" },
+            { number: 22, label: "Age" },
+            { number: 2, label: "Years of experience" },
+            { number: 20, label: "Projects worked on" },
+            { number: 5, label: "Projects Deployed" },
           ].map((stat, index) => (
             <div key={index} className="text-center group">
               <div className="text-4xl md:text-6xl font-black text-white mb-2 group-hover:text-green-400 transition-colors duration-300 brutal-font">

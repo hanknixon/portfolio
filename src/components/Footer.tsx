@@ -47,11 +47,25 @@ const Footer = ({ onPageChange }) => {
 
   return (
     <footer
-      className="relative py-20 border-t border-green-400/20"
+      className="relative py-20 border-t border-green-400/20 overflow-hidden"
       style={{ backgroundColor: "#1d1d22" }}
     >
-      {/* Background Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-t from-green-400/5 to-transparent pointer-events-none" />
+      {/* Background Image with low opacity - Zoomed out, centered, and edge-faded */}
+      <div className="absolute inset-0 flex justify-center items-center pointer-events-none mix-blend-luminosity opacity-10">
+        <img 
+          src="/images/backgroundfooter.png" 
+          alt="" 
+          className="h-full w-auto object-contain"
+          style={{
+            WebkitMaskImage: "linear-gradient(to right, transparent, black 15%, black 85%, transparent)",
+            maskImage: "linear-gradient(to right, transparent, black 15%, black 85%, transparent)"
+          }}
+        />
+      </div>
+      
+      {/* Background Gradients for blending */}
+      <div className="absolute inset-0 bg-gradient-to-t from-[#1d1d22] via-[#1d1d22]/50 to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-t from-green-400/10 to-transparent pointer-events-none" />
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
@@ -148,7 +162,7 @@ const Footer = ({ onPageChange }) => {
                 </span>
               </div>
 
-              <p className="text-gray-500">© 2025 All rights reserved.</p>
+              <p className="text-gray-500">© {new Date().getFullYear()} All rights reserved.</p>
             </div>
           </motion.div>
         </div>

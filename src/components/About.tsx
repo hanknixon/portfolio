@@ -11,6 +11,7 @@ import {
 import TiltedCard from "./ui/TiltedCard";
 import { LayoutGrid } from "./ui/layout-grid";
 import { useScrollAnimation } from "./hooks/useScrollAnimation";
+import { WhatIDo } from "./WhatIDo";
 
 const About = () => {
   const { ref: titleRef, isVisible: titleVisible } = useScrollAnimation();
@@ -498,87 +499,13 @@ const About = () => {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="text-4xl font-bold text-center mb-16 bg-gradient-to-r from-green-400 to-emerald-300 bg-clip-text text-transparent brutal-font"
           >
-            About Me
+            What I Do
           </motion.h2>
 
-          {/* Education Section */}
-          <motion.div
-            ref={educationRef}
-            initial={{ opacity: 0, y: 50 }}
-            animate={
-              educationVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }
-            }
-            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="space-y-12 mb-20"
-          >
-            <h3 className="text-3xl font-semibold text-center text-white mb-12 flex items-center justify-center gap-3">
-              <GraduationCap className="text-green-400" size={32} />
-              Education
-            </h3>
 
-            <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-              {educationData.map((edu, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={
-                    educationVisible
-                      ? { opacity: 1, scale: 1 }
-                      : { opacity: 0, scale: 0.9 }
-                  }
-                  transition={{
-                    duration: 0.6,
-                    delay: 0.1 * index,
-                    ease: "easeOut",
-                  }}
-                  className="flex flex-col items-center space-y-4"
-                >
-                  <TiltedCard
-                    imageSrc={edu.image}
-                    altText={`${edu.school} campus`}
-                    captionText={`${edu.school} - ${edu.location}`}
-                    containerHeight="280px"
-                    containerWidth="100%"
-                    imageHeight="280px"
-                    imageWidth="280px"
-                    rotateAmplitude={12}
-                    scaleOnHover={1.1}
-                    showMobileWarning={false}
-                    showTooltip={true}
-                    displayOverlayContent={false}
-                  />
 
-                  <div className="text-center space-y-2">
-                    <h4 className="text-xl font-semibold text-white">
-                      {edu.school}
-                    </h4>
-                    <p className="text-green-400 font-medium">{edu.degree}</p>
-                    <div className="flex items-center justify-center gap-4 text-sm text-gray-400">
-                      <div className="flex items-center gap-1">
-                        <MapPin size={14} />
-                        {edu.location}
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <Calendar size={14} />
-                        {edu.period}
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Modern Layout Grid */}
-          <motion.div
-            ref={gridRef}
-            initial={{ opacity: 0, y: 50 }}
-            animate={gridVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-            transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-            className="mt-20"
-          >
-            <LayoutGrid cards={cards} />
-          </motion.div>
+          {/* What I Do Section */}
+          <WhatIDo />
         </div>
       </div>
     </section>

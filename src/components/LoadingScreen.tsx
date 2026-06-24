@@ -356,7 +356,7 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({
                 Hank Nixon
               </h1>
               <p className="text-green-400 text-center font-medium">
-                Software Engineer & Full-Stack Developer
+                Software Engineer & Graphic Designer
               </p>
             </motion.div>
 

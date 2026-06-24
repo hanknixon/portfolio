@@ -1,156 +1,103 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { useScrollAnimation } from "./hooks/useScrollAnimation";
-import InteractiveSelector from "./ui/interactive-selector";
-import { AnimatedUnderline } from "./ui/animated-underline";
-import {
-  Palette,
-  Users,
-  FileText,
-  Mic,
-  Grid3X3,
-  Trophy,
-  Music,
-  Youtube,
-  ExternalLink,
-} from "lucide-react";
+import { Youtube, ExternalLink } from "lucide-react";
+
+const BGPattern = ({ size, fill, className }: any) => (
+  <div
+    className={className}
+    style={{
+      backgroundImage: `
+      linear-gradient(to right, ${fill} 1px, transparent 1px),
+      linear-gradient(to bottom, ${fill} 1px, transparent 1px)
+    `,
+      backgroundSize: `${size}px ${size}px`,
+    }}
+  />
+);
 
 const DesignEdits = () => {
-  const { ref: titleRef, isVisible: titleVisible } = useScrollAnimation();
-  const { ref: selectorRef, isVisible: selectorVisible } = useScrollAnimation();
-  const { ref: linksRef, isVisible: linksVisible } = useScrollAnimation();
+  const { ref, isVisible } = useScrollAnimation();
 
   const designWorks = [
-    {
-      title: "Band Calls Flyers",
-      description: "Eye-catching promotional flyers for music events",
-      image: "/images/bandcall.jpg",
-      icon: <Music size={24} className="text-white" />,
-    },
-    {
-      title: "Workshop Posters",
-      description: "Professional educational event promotions",
-      image: "/images/workshop.jpg",
-      icon: <Users size={24} className="text-white" />,
-    },
-    {
-      title: "Brochures",
-      description: "Elegant tri-fold and bi-fold marketing materials",
-      image: "/images/brochure.jpg",
-      icon: <FileText size={24} className="text-white" />,
-    },
-    {
-      title: "Special Day Speaker Flyer",
-      description: "Premium speaker event announcements",
-      image: "/images/speaker.jpg",
-      icon: <Mic size={24} className="text-white" />,
-    },
-    {
-      title: "Instagram Grid for Association",
-      description: "Cohesive social media visual identity",
-      image: "/images/grid.jpg",
-      icon: <Grid3X3 size={24} className="text-white" />,
-    },
-    {
-      title: "Contest Announcement Poster",
-      description: "Dynamic competition promotional graphics",
-      image: "/images/contest.jpg",
-      icon: <Trophy size={24} className="text-white" />,
-    },
-    {
-      title: "Band Members Announcement",
-      description: "Stylish member introduction designs",
-      image: "/images/band.jpg",
-      icon: <Palette size={24} className="text-white" />,
-    },
+    { title: "RE9 Poster", image: "/images/re9poster.png", isWide: true },
+    { title: "Band Calls Flyers", image: "/images/bandcall.jpg" },
+    { title: "Workshop Posters", image: "/images/workshop.jpg" },
+    { title: "Brochures", image: "/images/brochure.jpg" },
+    { title: "Special Day Speaker Flyer", image: "/images/speaker.jpg" },
+    { title: "Instagram Grid for Association", image: "/images/grid.jpg" },
+    { title: "Contest Announcement Poster", image: "/images/contest.jpg" },
+    { title: "Band Members Announcement", image: "/images/band.jpg" },
   ];
+
+  // The CSS marquee translates exactly -50%, so we MUST use exactly two identical sets
+  const repeatedWorks = [...designWorks, ...designWorks];
 
   return (
     <section
       id="design-edits"
-      className="py-20 relative"
+      className="py-24 relative isolate overflow-hidden"
       style={{ backgroundColor: "#1d1d22" }}
     >
-      <div className="container mx-auto px-6">
-        <div className="max-w-7xl mx-auto">
-          {/* Animated Title */}
-          <motion.div
-            ref={titleRef}
-            initial={{ opacity: 0, y: 50 }}
-            animate={
-              titleVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }
-            }
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 brutal-font">
-              Design{" "}
-              <span className="bg-gradient-to-r from-green-400 to-emerald-300 bg-clip-text text-transparent">
-                | Edits
-              </span>
-            </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              Explore my creative journey through graphic design and video
-              editing. From promotional materials to social media content, every
-              piece tells a story.
-            </p>
-          </motion.div>
+      <BGPattern 
+        size={80}
+        fill="rgba(255, 255, 255, 0.03)"
+        className="absolute inset-0 z-[-1]"
+      />
 
-          {/* Interactive Design Selector */}
-          <motion.div
-            ref={selectorRef}
-            initial={{ opacity: 0, y: 50 }}
-            animate={
-              selectorVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }
-            }
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="mb-16"
-          >
-            <InteractiveSelector options={designWorks} />
-          </motion.div>
+      <div className="max-w-[1800px] mx-auto px-6 md:px-8 mb-16">
+        <motion.div
+          ref={ref}
+          initial={{ opacity: 0, y: 30 }}
+          animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6"
+        >
+          <h2 className="text-white text-4xl md:text-5xl lg:text-6xl font-black brutal-font tracking-tight uppercase">
+            PLAYGROUND / <span className="text-green-400">ARCHIVE</span>
+          </h2>
 
-          {/* Links Section */}
-          <motion.div
-            ref={linksRef}
-            initial={{ opacity: 0, y: 30 }}
-            animate={
-              linksVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }
-            }
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="flex flex-col md:flex-row gap-8 justify-center items-center text-center"
-          >
-            <div className="flex flex-col items-center gap-4">
-              <h3 className="text-xl font-semibold text-white">
-                Video Content
-              </h3>
-              <AnimatedUnderline
-                href="https://www.youtube.com/@h4nkamv"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-2xl font-semibold"
-              >
-                <Youtube size={24} />
-                Check out my AMVs
-              </AnimatedUnderline>
+          <div className="flex items-center gap-6 pb-2">
+            <a 
+              href="https://www.youtube.com/@h4nkamv" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-white transition-colors flex items-center gap-2 font-semibold tracking-wide text-sm md:text-base uppercase group"
+            >
+               View Channel <Youtube size={20} strokeWidth={2.5} className="group-hover:text-red-500 transition-colors" />
+            </a>
+            <a 
+              href="https://drive.google.com/drive/folders/1szFmTpF2hLlPTe1q3DoKGipucqu2YsL2?usp=sharing" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-white transition-colors flex items-center gap-2 font-semibold tracking-wide text-sm md:text-base uppercase group"
+            >
+               View Archive <ExternalLink size={20} strokeWidth={2.5} className="group-hover:text-blue-400 transition-colors" />
+            </a>
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Marquee Loop */}
+      <div className="w-[100vw] relative left-[50%] right-[50%] -ml-[50vw] -mr-[50vw] overflow-hidden mt-6">
+        <div className="flex whitespace-nowrap w-max animate-marquee hover:[animation-play-state:paused] gap-4 md:gap-8 px-4">
+          {repeatedWorks.map((work, index) => (
+            <div 
+              key={index} 
+              className={`h-[350px] md:h-[500px] rounded-xl overflow-hidden flex-shrink-0 relative group shadow-2xl ${work.isWide ? 'aspect-video' : 'aspect-[3/4]'}`}
+            >
+              <img 
+                src={work.image} 
+                alt={work.title} 
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-x-0 bottom-0 p-6 md:p-8 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <h3 className="text-white text-xl md:text-2xl font-bold brutal-font tracking-wide whitespace-normal leading-snug">
+                  {work.title}
+                </h3>
+              </div>
             </div>
-
-            <div className="hidden md:block w-px h-16 bg-green-400/30" />
-
-            <div className="flex flex-col items-center gap-4">
-              <h3 className="text-xl font-semibold text-white">
-                Design Portfolio
-              </h3>
-              <AnimatedUnderline
-                href="https://drive.google.com/drive/folders/1szFmTpF2hLlPTe1q3DoKGipucqu2YsL2?usp=sharing"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-2xl font-semibold"
-              >
-                <ExternalLink size={24} />
-                Check out more of my works
-              </AnimatedUnderline>
-            </div>
-          </motion.div>
+          ))}
         </div>
       </div>
     </section>

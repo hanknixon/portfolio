@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import Header from "./components/Header";
+import { Header } from "./components/Header";
 import LoadingScreen from "./components/LoadingScreen";
 import { BGPattern } from "./components/ui/bg-pattern";
 import Contact from "./components/contact/Contact";
+import { EasterEggCall } from "./components/EasterEggCall";
 
 // Professional Page Components
 import Hero from "./components/Hero";
@@ -78,8 +79,8 @@ function App() {
         page === "personal"
           ? "/personal"
           : page === "contact"
-          ? "/contact"
-          : "/";
+            ? "/contact"
+            : "/";
       window.history.pushState({ page }, "", newPath);
 
       setTimeout(() => setIsLoading(false), 2000);
@@ -109,6 +110,7 @@ function App() {
 
       <div className="relative z-10">
         <Header onPageChange={handlePageChange} currentPage={currentPage} />
+        <EasterEggCall />
 
         {currentPage === "professional" ? (
           // Professional Page
