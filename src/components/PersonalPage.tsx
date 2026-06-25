@@ -3,6 +3,39 @@ import { motion } from "framer-motion";
 import { BGPattern } from "./ui/bg-pattern";
 import { Heart, Coffee, Music, Camera, Book, Gamepad2 } from "lucide-react";
 
+const ChangingImageCard = () => {
+  const [currentImageIndex, setCurrentImageIndex] = React.useState(0);
+  const images = [
+    "/images/hankper1.png",
+    "/images/hankper2.png",
+    "/images/hankper3.png",
+    "/images/hankper4.png",
+    "/images/hankper5.png",
+  ];
+
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % images.length);
+    }, 1200);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="w-full h-full bg-gray-800 relative">
+      {images.map((img, index) => (
+        <img
+          key={img}
+          src={img}
+          alt={`Hank Personal ${index + 1}`}
+          className={`absolute inset-0 w-full h-full object-cover ${index === currentImageIndex ? "opacity-100" : "opacity-0"
+            }`}
+          style={{ transition: "none" }}
+        />
+      ))}
+    </div>
+  );
+};
+
 const PersonalPage = () => {
   const hobbies = [
     {
@@ -72,18 +105,42 @@ const PersonalPage = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="text-center mb-20"
+              className="mb-32 relative flex flex-col items-center"
             >
-              <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 brutal-font">
-                Beyond the{" "}
-                <span className="bg-gradient-to-r from-green-400 to-emerald-300 bg-clip-text text-transparent">
-                  Code
-                </span>
-              </h1>
-              <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-                Welcome to my personal space. Here's what drives me, inspires
-                me, and keeps me balanced outside of the professional world.
-              </p>
+              {/* Top part: Hello I'm Hank + Changing Image */}
+              <div className="flex flex-col md:flex-row items-center justify-center gap-10 md:gap-16 z-20 w-full max-w-5xl mx-auto mb-[-40px] md:mb-[-80px]">
+                {/* Left Side */}
+                <div className="flex-1 text-left flex flex-col justify-center md:items-end md:text-right">
+                  <div className="max-w-md">
+                    <h2 className="text-5xl md:text-7xl font-bold text-white mb-4 tracking-tight">Hello, I'm Hank</h2>
+                    <p className="text-xl md:text-2xl text-gray-400 leading-relaxed">
+                      Welcome to my personal space. Here's what drives me, inspires
+                      me, and keeps me balanced outside of the professional world.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Separation Line */}
+                <div className="hidden md:block w-px h-56 bg-gray-700/80"></div>
+
+                {/* Right Side: Changing Image Card */}
+                <div className="flex-1 flex justify-center md:justify-start">
+                  <div className="flex-shrink-0 w-64 h-80 md:w-72 md:h-[22rem] bg-gray-800 rounded-3xl overflow-hidden shadow-2xl border border-gray-700/50 relative z-20">
+                    <div className="absolute top-4 left-4 w-3 h-3 bg-green-400 rounded-full z-30"></div>
+                    <ChangingImageCard />
+                  </div>
+                </div>
+              </div>
+
+              {/* Bottom part: BEYOND THE CODE overlapping in front */}
+              <div className="z-30 relative w-full text-center pointer-events-none mt-10 md:mt-0">
+                <h1
+                  className="text-[13vw] md:text-[11vw] font-black text-gray-100 leading-none tracking-tighter whitespace-nowrap drop-shadow-2xl brutal-font"
+                  style={{ textShadow: "0 10px 40px rgba(0,0,0,0.8)" }}
+                >
+                  BEYOND THE CODE
+                </h1>
+              </div>
             </motion.div>
 
             {/* About Me Personal */}

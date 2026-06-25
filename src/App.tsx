@@ -4,6 +4,7 @@ import LoadingScreen from "./components/LoadingScreen";
 import { BGPattern } from "./components/ui/bg-pattern";
 import Contact from "./components/contact/Contact";
 import { EasterEggCall } from "./components/EasterEggCall";
+import { CustomCursor } from "./components/CustomCursor";
 
 // Professional Page Components
 import Hero from "./components/Hero";
@@ -16,38 +17,51 @@ import Footer from "./components/Footer";
 // Personal Page Components
 import PersonalHero from "./components/personal/PersonalHero";
 import PersonalAbout from "./components/personal/PersonalAbout";
-import Hobbies from "./components/personal/Hobbies";
+import MyRig from "./components/personal/MyRig";
 import PersonalContact from "./components/personal/PersonalContact";
 
+// Legal Pages & Popups
+import PrivacyPolicy from "./components/legal/PrivacyPolicy";
+import CookiePolicy from "./components/legal/CookiePolicy";
+import LegalNotice from "./components/legal/LegalNotice";
+import { CookiePopup } from "./components/legal/CookiePopup";
+
+type PageType = "professional" | "personal" | "contact" | "privacy-policy" | "cookie-policy" | "legal-notice";
+
 function App() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState<
-    "professional" | "personal" | "contact"
-  >("professional");
-  const [loadingPageType, setLoadingPageType] = useState<
-    "professional" | "personal" | "contact" | "random"
-  >("random");
+  const getInitialPage = (): PageType => {
+    const path = window.location.pathname;
+    if (path === "/personal") return "personal";
+    if (path === "/contact") return "contact";
+    if (path === "/privacy-policy") return "privacy-policy";
+    if (path === "/cookie-policy") return "cookie-policy";
+    if (path === "/legal-notice") return "legal-notice";
+    return "professional";
+  };
+
+  const [currentPage, setCurrentPage] = useState<PageType>(getInitialPage());
+  
+  // We determine initial loading state based on first visit to professional page
+  const [isLoading, setIsLoading] = useState(() => {
+    const hasVisited = sessionStorage.getItem("hasVisited");
+    const initialPage = getInitialPage();
+    return !hasVisited && initialPage === "professional";
+  });
+  
+  const [loadingPageType, setLoadingPageType] = useState<"professional" | "personal" | "contact" | "random">("random");
 
   useEffect(() => {
-    // Show loading screen on first visit or page refresh
+    // Show loading screen only on first visit to professional page
     const hasVisited = sessionStorage.getItem("hasVisited");
     if (!hasVisited) {
-      setIsLoading(true);
-      setLoadingPageType("random"); // First visit gets random messages
+      setLoadingPageType("random");
       sessionStorage.setItem("hasVisited", "true");
     }
   }, []);
 
   useEffect(() => {
     const handlePopState = (event: PopStateEvent) => {
-      const path = window.location.pathname;
-      if (path === "/personal") {
-        setCurrentPage("personal");
-      } else if (path === "/contact") {
-        setCurrentPage("contact");
-      } else {
-        setCurrentPage("professional");
-      }
+      setCurrentPage(getInitialPage());
     };
 
     window.addEventListener("popstate", handlePopState);
@@ -55,35 +69,39 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const path = window.location.pathname;
-    if (path === "/personal") {
-      setCurrentPage("personal");
-    } else if (path === "/contact") {
-      setCurrentPage("contact");
-    } else {
-      setCurrentPage("professional");
-    }
+    setCurrentPage(getInitialPage());
   }, []);
+
+  // Scroll to top on page change
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [currentPage]);
 
   const handleLoadingComplete = () => {
     setIsLoading(false);
   };
 
-  const handlePageChange = (page: "professional" | "personal" | "contact") => {
+  const handlePageChange = (page: PageType) => {
     if (page !== currentPage) {
-      setIsLoading(true);
+      // Force scroll to top immediately and robustly
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+      setTimeout(() => window.scrollTo({ top: 0, left: 0, behavior: "instant" }), 10);
+      
       setCurrentPage(page);
-      setLoadingPageType(page);
 
       const newPath =
         page === "personal"
           ? "/personal"
           : page === "contact"
             ? "/contact"
-            : "/";
+            : page === "privacy-policy"
+              ? "/privacy-policy"
+              : page === "cookie-policy"
+                ? "/cookie-policy"
+                : page === "legal-notice"
+                  ? "/legal-notice"
+                  : "/";
       window.history.pushState({ page }, "", newPath);
-
-      setTimeout(() => setIsLoading(false), 2000);
     }
   };
 
@@ -108,13 +126,17 @@ function App() {
         className="fixed inset-0"
       />
 
+      {/* Global Elements */}
+      <CustomCursor />
+      <CookiePopup />
+
       <div className="relative z-10">
         <Header onPageChange={handlePageChange} currentPage={currentPage} />
-        <EasterEggCall />
 
         {currentPage === "professional" ? (
           // Professional Page
           <>
+            <EasterEggCall />
             <Hero />
             <About />
             <Experience />
@@ -127,13 +149,19 @@ function App() {
           <>
             <PersonalHero />
             <PersonalAbout />
-            <Hobbies />
+            <MyRig />
             <PersonalContact onPageChange={handlePageChange} />
           </>
-        ) : (
+        ) : currentPage === "contact" ? (
           // Contact Page
           <Contact />
-        )}
+        ) : currentPage === "privacy-policy" ? (
+          <PrivacyPolicy onPageChange={handlePageChange} />
+        ) : currentPage === "cookie-policy" ? (
+          <CookiePolicy onPageChange={handlePageChange} />
+        ) : currentPage === "legal-notice" ? (
+          <LegalNotice onPageChange={handlePageChange} />
+        ) : null}
       </div>
     </div>
   );

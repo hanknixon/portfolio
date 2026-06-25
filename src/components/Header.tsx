@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Download } from 'lucide-react';
+import { Download, MousePointer2 } from 'lucide-react';
 
 interface HeaderProps {
   onPageChange?: (page: "professional" | "personal" | "contact") => void;
@@ -111,9 +111,12 @@ export const Header: React.FC<HeaderProps> = ({ onPageChange, currentPage }) => 
                 exit={{ opacity: 0, transition: { duration: 0.04 } }}
                 className="absolute inset-0 flex items-center justify-center cursor-pointer select-none"
               >
-                <span className="text-[17px] font-semibold tracking-tight text-[#f2f2f7]">
-                  Hover
-                </span>
+                <motion.div
+                  animate={{ y: [0, -2, 0, 2, 0] }}
+                  transition={{ repeat: Infinity, duration: 2.5, ease: "easeInOut" }}
+                >
+                  <MousePointer2 className="w-4 h-4 text-[#f2f2f7] fill-transparent" />
+                </motion.div>
               </motion.div>
             )}
 
