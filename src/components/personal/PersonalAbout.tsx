@@ -57,7 +57,7 @@ const PersonalAbout = () => {
                   {/* Right */}
                   <img src="/images/para2-3.jpeg" alt="Relationships Right 1" className={`absolute -right-20 md:-right-40 lg:-right-48 top-28 w-28 md:w-36 aspect-[4/5] object-cover rounded-md shadow-2xl z-10 transition-all duration-500 ease-out origin-center ${hoveredSkill === 'relationships' ? 'scale-100 rotate-[8deg] translate-x-0' : 'scale-75 rotate-[15deg] translate-x-10'}`} />
                   <img src="/images/para2-4.jpeg" alt="Relationships Right 2" className={`absolute -right-28 md:-right-48 lg:-right-60 top-52 w-28 md:w-36 aspect-[4/5] object-cover rounded-md shadow-2xl z-20 transition-all duration-500 ease-out origin-center delay-75 ${hoveredSkill === 'relationships' ? 'scale-100 rotate-[-6deg] translate-x-0' : 'scale-75 rotate-[5deg] translate-x-10'}`} />
-                  <img src="/images/para2-5.jpeg" alt="Relationships Right 3" className={`absolute -right-24 md:-right-52 lg:-right-64 top-80 w-32 md:w-48 aspect-[4/5] object-cover rounded-md shadow-2xl z-30 transition-all duration-500 ease-out origin-center delay-150 ${hoveredSkill === 'relationships' ? 'scale-100 rotate-[4deg] translate-x-0' : 'scale-75 rotate-[10deg] translate-x-10'}`} />
+                  <img src="/images/para2-5.jpeg" alt="Relationships Right 3" className={`absolute -right-24 md:-right-52 lg:-right-64 top-80 w-40 md:w-64 aspect-[3/2] object-cover rounded-md shadow-2xl z-30 transition-all duration-500 ease-out origin-center delay-150 ${hoveredSkill === 'relationships' ? 'scale-100 rotate-[4deg] translate-x-0' : 'scale-75 rotate-[10deg] translate-x-10'}`} />
                 </div>
 
                 {/* Designing Collage */}

@@ -159,13 +159,12 @@ export const Header: React.FC<HeaderProps> = ({ onPageChange, currentPage }) => 
 
                   {/* Resume CTA */}
                   <a
-                    href="/resume/Hank Emmanuel Nixon Resume.pdf"
-                    download="Hank_Nixon_Resume.pdf"
+                    href="https://drive.google.com/file/d/1Cc9aNZjlUPWWSNJoNeyAAcpEJycr2yac/view?usp=drive_link"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center justify-center gap-2 bg-[#10b981] hover:bg-[#059669] text-black px-6 py-3 md:py-2 rounded-xl md:rounded-full text-sm font-semibold transition-transform active:scale-95"
                   >
-                    <span>Download Resume</span>
+                    <span>View Resume</span>
                     <Download size={16} strokeWidth={2.5} />
                   </a>
 

@@ -195,13 +195,14 @@ const Hero = () => {
 
             {/* Actions - FIXED FOR MOBILE */}
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 animate-fade-in-delay-3 mt-8">
-              {/* Download CV Button */}
+              {/* View CV Button */}
               <a
-                href="/resume/Hank Emmanuel Nixon Resume.pdf"
-                download="Hank Emmanuel Nixon Resume.pdf"
+                href="https://drive.google.com/file/d/1Cc9aNZjlUPWWSNJoNeyAAcpEJycr2yac/view?usp=drive_link"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center gap-3 px-6 py-3 border border-green-400 text-green-400 rounded-full hover:bg-green-400 hover:text-black transition-all duration-300 font-medium hover:shadow-lg hover:shadow-green-400/25 w-full sm:w-auto justify-center sm:justify-start"
               >
-                DOWNLOAD RESUME
+                VIEW RESUME
                 <Download size={18} />
               </a>
 
