@@ -133,11 +133,11 @@ const Experience = () => {
               Quick Description
             </h2>
             <p className="text-gray-300 text-[15px] sm:text-base leading-relaxed">
-              Hi, I'm Hank Emmanuel Nixon, a Computer Science graduate from Amal Jyothi College of Engineering, Kerala, currently residing in the UAE and open to new opportunities. My background merges technical software engineering with creative disciplines—including UI/UX design, frontend development, and graphic design.
+              Hi, I'm Hank Emmanuel Nixon, a Computer Science graduate from Amal Jyothi College of Engineering, Kerala, currently based in the UAE and open to new opportunities. My background combines software engineering with UI/UX design, frontend development, and graphic design. I specialize in building scalable digital products, including CRM systems, SaaS platforms, AI-powered applications, business automation tools, and modern web experiences.
               <br /><br />
-              Outside of work, I am an avid gamer, constantly exploring game mechanics to inspire and develop interactive, fun side-projects. I have worked with clients globally and hold professional experience across various international organizations.
+              Over the years, I have worked with clients and organizations across multiple countries, delivering solutions that balance technical excellence with intuitive user experiences. From custom business platforms and CRM solutions to AI-integrated and cybersecurity-focused products, I enjoy transforming complex ideas into practical, user-centric software. Outside of work, I am an avid gamer and technology enthusiast who enjoys building creative side projects inspired by interactive experiences.
               <br /><br />
-              As the CTO of my own startup, I navigate complex technical decisions, communicate directly with global clients, and take full ownership of product lifecycles. This hands-on leadership has given me a deep understanding of business stakes and client requirements, driving my capability as a robust and reliable software engineer.
+              As the CTO of my startup, I lead technical strategy, product development, and client engagement while overseeing the entire product lifecycle. Working closely with global clients and managing complex technical decisions has given me a strong understanding of both technology and business, enabling me to build reliable, scalable, and impactful digital solutions.
             </p>
           </div>
 

@@ -154,7 +154,7 @@ function App() {
           </>
         ) : currentPage === "contact" ? (
           // Contact Page
-          <Contact />
+          <Contact onPageChange={handlePageChange} />
         ) : currentPage === "privacy-policy" ? (
           <PrivacyPolicy onPageChange={handlePageChange} />
         ) : currentPage === "cookie-policy" ? (
