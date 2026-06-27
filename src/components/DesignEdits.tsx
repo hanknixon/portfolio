@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { motion } from "framer-motion";
 import { useScrollAnimation } from "./hooks/useScrollAnimation";
 import { Youtube, ExternalLink } from "lucide-react";
@@ -18,6 +18,7 @@ const BGPattern = ({ size, fill, className }: any) => (
 
 const DesignEdits = () => {
   const { ref, isVisible } = useScrollAnimation();
+  const marqueeRef = useRef<HTMLDivElement>(null);
 
   const designWorks = [
     { title: "RE9 Poster", image: "/images/re9poster.png", isWide: true },
@@ -28,6 +29,8 @@ const DesignEdits = () => {
     { title: "Instagram Grid for Association", image: "/images/grid.jpg" },
     { title: "Contest Announcement Poster", image: "/images/contest.jpg" },
     { title: "Band Members Announcement", image: "/images/band.jpg" },
+    { title: "World of RE Japanese Poster", image: "/images/World of RE Japanese Poster.jpg" },
+    { title: "UAE SST Flyer", image: "/images/UAE SST Flyer.jpg" },
   ];
 
   // The CSS marquee translates exactly -50%, so we MUST use exactly two identical sets
@@ -80,7 +83,20 @@ const DesignEdits = () => {
 
       {/* Marquee Loop */}
       <div className="w-[100vw] relative left-[50%] right-[50%] -ml-[50vw] -mr-[50vw] overflow-hidden mt-6">
-        <div className="flex whitespace-nowrap w-max animate-marquee hover:[animation-play-state:paused] gap-4 md:gap-8 px-4">
+        <div 
+          ref={marqueeRef}
+          className="flex whitespace-nowrap w-max animate-marquee gap-4 md:gap-8 px-4"
+          onMouseEnter={() => {
+            if (marqueeRef.current) {
+              marqueeRef.current.getAnimations().forEach(a => a.playbackRate = 0.33);
+            }
+          }}
+          onMouseLeave={() => {
+            if (marqueeRef.current) {
+              marqueeRef.current.getAnimations().forEach(a => a.playbackRate = 1);
+            }
+          }}
+        >
           {repeatedWorks.map((work, index) => (
             <div 
               key={index} 
