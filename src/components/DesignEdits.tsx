@@ -21,16 +21,18 @@ const DesignEdits = () => {
   const marqueeRef = useRef<HTMLDivElement>(null);
 
   const designWorks = [
-    { title: "RE9 Poster", image: "/images/re9poster.png", isWide: true },
     { title: "Band Calls Flyers", image: "/images/bandcall.jpg" },
     { title: "Workshop Posters", image: "/images/workshop.jpg" },
     { title: "Brochures", image: "/images/brochure.jpg" },
     { title: "Special Day Speaker Flyer", image: "/images/speaker.jpg" },
-    { title: "Instagram Grid for Association", image: "/images/grid.jpg" },
+    { title: "Zypher 1", image: "/images/zypher1.jpeg" },
+    { title: "Zypher 2", image: "/images/zypher2.jpeg" },
     { title: "Contest Announcement Poster", image: "/images/contest.jpg" },
     { title: "Band Members Announcement", image: "/images/band.jpg" },
     { title: "World of RE Japanese Poster", image: "/images/World of RE Japanese Poster.jpg" },
     { title: "UAE SST Flyer", image: "/images/UAE SST Flyer.jpg" },
+    { title: "Lucia Caminos SOLO", image: "/images/Lucia Caminos SOLO.jpg" },
+    { title: "Jason Duval SOLO", image: "/images/Jason Duval SOLO.jpg" },
   ];
 
   // The CSS marquee translates exactly -50%, so we MUST use exactly two identical sets
