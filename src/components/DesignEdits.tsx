@@ -34,6 +34,7 @@ const DesignEdits = () => {
     { title: "Lucia Caminos SOLO", image: "/images/Lucia Caminos SOLO.jpg" },
     { title: "Jason Duval SOLO", image: "/images/Jason Duval SOLO.jpg" },
     { title: "Ada Wong SOLO", image: "/images/Ada Wong SOLO.jpg" },
+    { title: "CR7 Poster", image: "/images/CR7 Poster.jpg" },
   ];
 
   // The CSS marquee translates exactly -50%, so we MUST use exactly two identical sets
