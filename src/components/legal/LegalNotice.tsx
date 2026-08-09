@@ -26,7 +26,7 @@ const LegalNotice = ({ onPageChange }: { onPageChange: (page: string) => void })
           transition={{ duration: 0.5 }}
         >
           <div className="text-gray-500 text-sm mb-6">
-            Last updated: March 2026
+            Last updated: July 2026
           </div>
 
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 brutal-font tracking-tight">
