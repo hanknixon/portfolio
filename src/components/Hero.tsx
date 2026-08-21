@@ -296,9 +296,9 @@ const Hero = () => {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-24 max-w-4xl mx-auto animate-fade-in-delay-4">
           {[
             { number: 22, label: "Age" },
-            { number: 2, label: "Years of experience" },
-            { number: 20, label: "Projects worked on" },
-            { number: 5, label: "Projects Deployed" },
+            { number: 3, label: "Years of experience", suffix: "+" },
+            { number: 20, label: "Projects worked on", suffix: "+" },
+            { number: 5, label: "Projects Deployed", suffix: "+" },
           ].map((stat, index) => (
             <div key={index} className="text-center group">
               <div className="text-4xl md:text-6xl font-black text-white mb-2 group-hover:text-green-400 transition-colors duration-300 brutal-font">
@@ -309,6 +309,7 @@ const Hero = () => {
                   delay={index * 0.2}
                   className="group-hover:text-green-400 transition-colors duration-300"
                 />
+                {stat.suffix}
               </div>
               <div className="text-gray-400 text-sm group-hover:text-gray-300 transition-colors duration-300 uppercase tracking-wide">
                 {stat.label}

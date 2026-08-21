@@ -349,7 +349,7 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({
             <motion.div
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ duration: 0.3, delay: 0.1 }}
               className="mb-8"
             >
               <h1 className="text-4xl md:text-6xl font-bold text-white mb-2">
@@ -364,7 +364,7 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
+              transition={{ duration: 0.4, delay: 0.2 }}
               className="mb-12 flex items-center justify-center"
               style={{
                 minHeight: "200px",
@@ -379,7 +379,7 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
+              transition={{ duration: 0.3, delay: 0.3 }}
               className="w-full max-w-sm"
             >
               <p className="text-white text-lg mb-6 font-medium text-center">
@@ -401,7 +401,7 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({
                 className="text-green-400 text-sm font-medium text-center"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 1 }}
+                transition={{ delay: 0.4 }}
               >
                 {Math.round(progress)}%
               </motion.p>
@@ -411,7 +411,7 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 1.2 }}
+              transition={{ duration: 0.3, delay: 0.5 }}
               className="mt-8"
             >
               <p className="text-gray-400 text-sm text-center">

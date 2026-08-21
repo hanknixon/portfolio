@@ -109,7 +109,7 @@ function App() {
     return (
       <LoadingScreen
         onComplete={handleLoadingComplete}
-        duration={3000}
+        duration={1200}
         pageType={loadingPageType}
       />
     );

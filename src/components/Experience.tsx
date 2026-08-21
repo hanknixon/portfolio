@@ -4,7 +4,7 @@ import { useScrollAnimation } from "./hooks/useScrollAnimation";
 
 const experienceList = [
   {
-    role: "Founding Member & CTO",
+    role: "Founding Member & Software Engineer",
     company: "Zypher Software Solutions",
     date: "Jan 2026 – Present",
     location: "Remote",
@@ -14,7 +14,7 @@ const experienceList = [
   {
     role: "Freelance Graphic Designer | Developer",
     company: "Self-Employed",
-    date: "Sep 2024 – Present",
+    date: "Sep 2023 – Present",
     location: "Remote",
     logo: "/logos/Freelance.svg",
     description: "Delivered responsive portfolio websites and branded digital assets. Designed logos, banners, and social media templates in Adobe Suite, and created aesthetic, minimal UI experiences using modern frontend stacks."
@@ -137,7 +137,7 @@ const Experience = () => {
               <br /><br />
               Over the years, I have worked with clients and organizations across multiple countries, delivering solutions that balance technical excellence with intuitive user experiences. From custom business platforms and CRM solutions to AI-integrated and cybersecurity-focused products, I enjoy transforming complex ideas into practical, user-centric software. Outside of work, I am an avid gamer and technology enthusiast who enjoys building creative side projects inspired by interactive experiences.
               <br /><br />
-              As the CTO of my startup, I lead technical strategy, product development, and client engagement while overseeing the entire product lifecycle. Working closely with global clients and managing complex technical decisions has given me a strong understanding of both technology and business, enabling me to build reliable, scalable, and impactful digital solutions.
+              As the Founding Engineer of my startup, I lead technical strategy, product development, and client engagement while overseeing the entire product lifecycle. Working closely with global clients and managing complex technical decisions has given me a strong understanding of both technology and business, enabling me to build reliable, scalable, and impactful digital solutions.
             </p>
           </div>
 
